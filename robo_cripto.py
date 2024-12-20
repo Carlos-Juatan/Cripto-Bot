@@ -17,6 +17,9 @@ cliente_binance = Client(api_key, secret_key)
 # min_qty = float(lot_size_filter['minQty'])
 # max_qty = float(lot_size_filter['maxQty'])
 # step_size = float(lot_size_filter['stepSize'])
+# pegar o preço
+# transacao = cliente_binance.get_recent_trades(symbol="SOLBRL", limit=1)
+# print(transacao) # dentro dessa transação tem o 'price' que é o ultimo preço negociado da moeda, ou seja o preço atual
 
 # print(lot_size_filter, min_qty, max_qty, step_size)
 
@@ -86,14 +89,14 @@ def estrategia_trade(dados, codigo_ativo, ativo_operado, quantidade, posicao):
 
     return posicao
 
-posicao_atual = False
+posicao_atual = True
 
 while True:
 
     dados_atualizados = pegando_dados(codigo=codigo_operado, intervalo=periodo_candle)
     posicao_atual = estrategia_trade(dados_atualizados, codigo_ativo=codigo_operado, 
                                         ativo_operado=ativo_operado, quantidade=quantidade, posicao=posicao_atual)
-    time.sleep(60 * 60)
+    time.sleep(60 * 20)
 
 
 
